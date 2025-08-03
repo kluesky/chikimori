@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrasi API - Shikimori-MD</title>
+    <style>
+        :root {
+            --primary: #6a45d1;
+            --secondary: #4a2db8;
+            --accent: #ff6b6b;
+            --dark: #1e1e2e;
+            --light: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(106, 69, 209, 0.2);
+        }
+        
+        .logo i {
+            font-size: 3.5rem;
+            color: white;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .divider {
+            height: 4px;
+            width: 80px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 0 auto 2rem;
+            border-radius: 2px;
+        }
+        
+        .feature-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 0.8rem;
+            color: var(--accent);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(106, 69, 209, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 69, 209, 0.4);
+        }
+        
+        .code-block {
+            background-color: #1e1e2e;
+            color: #f8f8f2;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .api-endpoint {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+            font-family: monospace;
+        }
+        
+        .note-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .method-get { color: #61affe; }
+        .method-post { color: #49cc90; }
+        .method-put { color: #fca130; }
+        .method-delete { color: #f93e3e; }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .feature-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-plug"></i>
+            </div>
+            <h1>Integrasi API</h1>
+            <p class="subtitle">Koneksikan Shikimori-MD dengan Sistem Anda Melalui API</p>
+            <div class="divider"></div>
+        </header>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-info-circle"></i> Tentang API Shikimori-MD</h2>
+            <p>API Shikimori-MD memungkinkan Anda mengintegrasikan bot dengan sistem eksternal, aplikasi web, atau aplikasi mobile Anda. Dengan API ini, Anda dapat mengirim dan menerima pesan, mengelola bot, dan mengakses berbagai fitur Shikimori-MD secara terprogram.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">RESTful API</h3>
+                    <p>Endpoint API modern dengan standar RESTful untuk integrasi mudah</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="feature-title">Keamanan</h3>
+                    <p>Autentikasi JWT dan rate limiting untuk perlindungan sistem</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Dokumentasi Lengkap</h3>
+                    <p>Dokumentasi API detail dengan contoh untuk semua bahasa populer</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-key"></i> Autentikasi API</h2>
+            <p>Untuk menggunakan API Shikimori-MD, Anda memerlukan API Key yang bisa didapatkan melalui:</p>
+            <div class="code-block">
+                // Dapatkan API Key melalui bot WhatsApp<br>
+                /apikey generate<br><br>
+                // Atau melalui dashboard web<br>
+                https://dashboard.shikimori-md.com/api
+            </div>
+            
+            <p>Gunakan API Key di header semua request:</p>
+            <div class="code-block">
+                Authorization: Bearer YOUR_API_KEY
+            </div>
+            
+            <div class="note-box">
+                <p><strong>Catatan:</strong> Jaga kerahasiaan API Key Anda. Jika API Key terkompromi, segera generate yang baru dan nonaktifkan yang lama.</p>
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-exchange-alt"></i> Endpoint Utama</h2>
+            <p>Berikut beberapa endpoint utama yang tersedia:</p>
+            
+            <h3>1. Mengirim Pesan</h3>
+            <div class="api-endpoint">
+                <span class="method-post">POST</span> /api/v1/messages/send
+            </div>
+            <div class="code-block">
+                {<br>
+                &nbsp;&nbsp;"to": "6281234567890",<br>
+                &nbsp;&nbsp;"message": "Hello from API!",<br>
+                &nbsp;&nbsp;"type": "text" // text, image, video, document, etc.<br>
+                }
+            </div>
+            
+            <h3>2. Menerima Pesan (Webhook)</h3>
+            <div class="api-endpoint">
+                <span class="method-post">POST</span> [YOUR_WEBHOOK_URL]
+            </div>
+            <div class="code-block">
+                {<br>
+                &nbsp;&nbsp;"event": "message",<br>
+                &nbsp;&nbsp;"from": "6281234567890",<br>
+                &nbsp;&nbsp;"message": "Pesan dari user",<br>
+                &nbsp;&nbsp;"timestamp": 1634567890<br>
+                }
+            </div>
+            
+            <h3>3. Manajemen Grup</h3>
+            <div class="api-endpoint">
+                <span class="method-post">POST</span> /api/v1/groups/create
+            </div>
+            <div class="code-block">
+                {<br>
+                &nbsp;&nbsp;"name": "Nama Grup",<br>
+                &nbsp;&nbsp;"participants": ["6281234567890", "6289876543210"]<br>
+                }
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-laptop-code"></i> Contoh Implementasi</h2>
+            <p>Berikut contoh kode untuk mengirim pesan menggunakan API Shikimori-MD:</p>
+            
+            <h3>JavaScript (Node.js)</h3>
+            <div class="code-block">
+                const axios = require('axios');<br><br>
+                async function sendMessage() {<br>
+                &nbsp;&nbsp;try {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;const response = await axios.post(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://api.shikimori-md.com/api/v1/messages/send',<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to: '6281234567890',<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: 'Hello from Node.js!',<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: 'text'<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Authorization': 'Bearer YOUR_API_KEY'<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.log(response.data);<br>
+                &nbsp;&nbsp;} catch (error) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.error(error);<br>
+                &nbsp;&nbsp;}<br>
+                }<br><br>
+                sendMessage();
+            </div>
+            
+            <h3>Python</h3>
+            <div class="code-block">
+                import requests<br><br>
+                url = "https://api.shikimori-md.com/api/v1/messages/send"<br>
+                headers = {<br>
+                &nbsp;&nbsp;"Authorization": "Bearer YOUR_API_KEY"<br>
+                }<br>
+                data = {<br>
+                &nbsp;&nbsp;"to": "6281234567890",<br>
+                &nbsp;&nbsp;"message": "Hello from Python!",<br>
+                &nbsp;&nbsp;"type": "text"<br>
+                }<br><br>
+                response = requests.post(url, json=data, headers=headers)<br>
+                print(response.json())
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-tachometer-alt"></i> Rate Limiting</h2>
+            <p>Untuk menjaga stabilitas sistem, API Shikimori-MD memiliki batasan request:</p>
+            <ul>
+                <li><strong>Free Tier:</strong> 60 request per menit</li>
+                <li><strong>Pro Tier:</strong> 300 request per menit</li>
+                <li><strong>Enterprise:</strong> Custom limit berdasarkan kebutuhan</li>
+            </ul>
+            <p>Response headers akan selalu menyertakan informasi rate limit Anda:</p>
+            <div class="code-block">
+                X-RateLimit-Limit: 60<br>
+                X-RateLimit-Remaining: 59<br>
+                X-RateLimit-Reset: 1634567890
+            </div>
+        </div>
+        
+        <div class="feature-section" style="text-align: center;">
+            <h2><i class="fas fa-rocket"></i> Mulai Integrasi Sekarang</h2>
+            <p>Unduh dokumentasi lengkap dan mulai integrasikan Shikimori-MD dengan sistem Anda!</p>
+            <a href="https://api.shikimori-md.com/docs" class="cta-button">
+                <i class="fas fa-book"></i> Dokumentasi API
+            </a>
+            <p>Atau dapatkan API Key dengan mengirim perintah <strong>/apikey</strong> ke bot WhatsApp</p>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Shikimori-MD. Semua hak dilindungi.</p>
+            <p>Versi API: v1.2.0 | Terakhir diperbarui: [Tanggal Pembaruan]</p>
+        </footer>
+    </div>
+</body>
+</html>

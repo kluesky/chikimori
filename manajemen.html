@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Grup - Shikimori-MD</title>
+    <style>
+        :root {
+            --primary: #6a45d1;
+            --secondary: #4a2db8;
+            --accent: #ff6b6b;
+            --dark: #1e1e2e;
+            --light: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(106, 69, 209, 0.2);
+        }
+        
+        .logo i {
+            font-size: 3.5rem;
+            color: white;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .divider {
+            height: 4px;
+            width: 80px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 0 auto 2rem;
+            border-radius: 2px;
+        }
+        
+        .feature-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 0.8rem;
+            color: var(--accent);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(106, 69, 209, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 69, 209, 0.4);
+        }
+        
+        .command-example {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .note-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .permission-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .permission-table th, .permission-table td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        
+        .permission-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .permission-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .feature-section {
+                padding: 1.5rem;
+            }
+            
+            .permission-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+            </div>
+            <h1>Manajemen Grup</h1>
+            <p class="subtitle">Fitur Canggih untuk Mengelola Grup WhatsApp dengan Shikimori-MD</p>
+            <div class="divider"></div>
+        </header>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-info-circle"></i> Fitur Manajemen Grup</h2>
+            <p>Shikimori-MD menyediakan berbagai alat canggih untuk membantu Anda mengelola grup WhatsApp dengan lebih efektif dan efisien.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="feature-title">Moderasi Otomatis</h3>
+                    <p>Filter spam, kata kasar, dan konten tidak pantas secara otomatis</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">Asisten Grup</h3>
+                    <p>Bot akan membantu menjawab pertanyaan umum di grup</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Analitik Grup</h3>
+                    <p>Statistik aktivitas anggota dan popularitas konten</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-code"></i> Perintah Dasar</h2>
+            <p>Berikut perintah-perintah dasar untuk manajemen grup:</p>
+            
+            <h3>1. Setup Bot di Grup</h3>
+            <div class="command-example">
+                /group activate - Mengaktifkan bot di grup ini<br>
+                /group deactivate - Menonaktifkan bot di grup ini<br>
+                /group settings - Melihat pengaturan grup
+            </div>
+            
+            <h3>2. Manajemen Anggota</h3>
+            <div class="command-example">
+                /group add 6281234567890 - Menambahkan anggota<br>
+                /group kick @mention - Mengeluarkan anggota<br>
+                /group promote @mention - Memberi admin<br>
+                /group demote @mention - Mencabut status admin
+            </div>
+            
+            <h3>3. Fitur Grup</h3>
+            <div class="command-example">
+                /group welcome on - Aktifkan pesan selamat datang<br>
+                /group goodbye on - Aktifkan pesan selamat tinggal<br>
+                /group rules - Atur peraturan grup<br>
+                /group info - Informasi grup
+            </div>
+            
+            <div class="note-box">
+                <p><strong>Catatan:</strong> Hanya admin grup yang dapat menggunakan perintah-perintah di atas. Pastikan bot telah dijadikan admin grup untuk fitur lengkap.</p>
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-cogs"></i> Fitur Lanjutan</h2>
+            <p>Fitur-fitur canggih untuk manajemen grup profesional:</p>
+            <ul>
+                <li><strong>Auto Responder:</strong> Jawab pertanyaan umum otomatis</li>
+                <li><strong>Anti-Link:</strong> Blokir link dari domain tertentu</li>
+                <li><strong>Word Filter:</strong> Sensor kata-kata tertentu</li>
+                <li><strong>Backup Grup:</strong> Simpan data anggota dan chat penting</li>
+                <li><strong>Jadwal Pesan:</strong> Kirim pengumuman sesuai jadwal</li>
+                <li><strong>Anti-Spam:</strong> Deteksi dan blokir spam otomatis</li>
+                <li><strong>Voting System:</strong> Buat polling langsung di grup</li>
+                <li><strong>Auto-Translate:</strong> Terjemahkan pesan antar bahasa</li>
+            </ul>
+        </div>
+        
+        <div class="feature-section">
+            <h2><i class="fas fa-user-tag"></i> Level Permission</h2>
+            <p>Shikimori-MD memiliki sistem permission untuk mengontrol akses fitur:</p>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Deskripsi</th>
+                        <th>Akses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pemilik</td>
+                        <td>Pembuat grup</td>
+                        <td>Semua perintah</td>
+                    </tr>
+                    <tr>
+                        <td>Admin</td>
+                        <td>Admin grup</td>
+                        <td>Hampir semua perintah kecuali beberapa fitur khusus</td>
+                    </tr>
+                    <tr>
+                        <td>Anggota</td>
+                        <td>Member biasa</td>
+                        <td>Perintah dasar seperti info, help, dll</td>
+                    </tr>
+                    <tr>
+                        <td>Terbatas</td>
+                        <td>Anggota yang dibatasi</td>
+                        <td>Tidak bisa menggunakan perintah bot</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="feature-section" style="text-align: center;">
+            <h2><i class="fas fa-rocket"></i> Tambahkan ke Grup Anda</h2>
+            <p>Undang Shikimori-MD ke grup WhatsApp Anda dan nikmati kemudahan manajemen grup!</p>
+            <a href="https://chat.whatsapp.com/[group_invite_link]" class="cta-button">
+                <i class="fab fa-whatsapp"></i> Undang ke Grup
+            </a>
+            <p>Atau tambahkan nomor bot <strong>Shikimori-MD</strong> ke grup Anda</p>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Shikimori-MD. Semua hak dilindungi.</p>
+            <p>Versi Manajemen Grup: v2.1.3 | Terakhir diperbarui: 02 Aug 2025</p>
+        </footer>
+    </div>
+</body>
+</html>

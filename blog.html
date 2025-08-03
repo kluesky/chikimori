@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikimori-MD Bot Process</title>
+    <style>
+        :root {
+            --primary: #6a45d1;
+            --secondary: #4a2db8;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #ff7e5f;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5ff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 20px rgba(106, 69, 209, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .process-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .process-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .process-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .process-desc {
+            padding: 1.5rem;
+        }
+        
+        .process-desc h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Shikimori-MD Bot Development Process</h1>
+            <p class="subtitle">Visual documentation of the WhatsApp bot creation journey</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="gallery">
+            <article class="process-card">
+                <img src="https://files.catbox.moe/qlcurc.jpg" alt="Project Structure" class="process-img">
+                <div class="process-desc">
+                    <h3>Project Structure</h3>
+                    <p>Initial setup showing the organized folder structure and core files of Shikimori-MD.</p>
+                </div>
+            </article>
+            
+            <article class="process-card">
+                <img src="assets/img/command-development.jpg" alt="Command Development" class="process-img">
+                <div class="process-desc">
+                    <h3>Command Development</h3>
+                    <p>Creating interactive commands with various features for user engagement.</p>
+                </div>
+            </article>
+            
+            <article class="process-card">
+                <img src="assets/img/api-integration.jpg" alt="API Integration" class="process-img">
+                <div class="process-desc">
+                    <h3>API Integration</h3>
+                    <p>Connecting external services and APIs to enhance bot functionality.</p>
+                </div>
+            </article>
+            
+            <article class="process-card">
+                <img src="assets/img/testing-phase.jpg" alt="Testing Phase" class="process-img">
+                <div class="process-desc">
+                    <h3>Testing Phase</h3>
+                    <p>Rigorous testing to ensure smooth performance across different devices.</p>
+                </div>
+            </article>
+            
+            <article class="process-card">
+                <img src="assets/img/ui-design.jpg" alt="UI Design" class="process-img">
+                <div class="process-desc">
+                    <h3>UI Elements</h3>
+                    <p>Designing interactive buttons, menus and visual responses.</p>
+                </div>
+            </article>
+            
+            <article class="process-card">
+                <img src="assets/img/deployment.jpg" alt="Deployment" class="process-img">
+                <div class="process-desc">
+                    <h3>Deployment</h3>
+                    <p>Setting up the server environment and going live with the bot.</p>
+                </div>
+            </article>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Shikimori-MD Bot Project | All images are from development process</p>
+        </div>
+    </footer>
+</body>
+</html>

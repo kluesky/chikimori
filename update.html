@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikimori MD - Pembaruan</title>
+    <style>
+        :root {
+            --primary: #6a5acd;
+            --secondary: #9370db;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #333333;
+            --text-light: #666666;
+            --feature: #4CAF50;
+            --improvement: #2196F3;
+            --fix: #FF9800;
+            --deprecated: #F44336;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .changelog-container {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .version-nav {
+            width: 250px;
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+        }
+        
+        .version-nav h3 {
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .version-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .version-item {
+            padding: 0.75rem 1rem;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .version-item:hover {
+            background: rgba(106, 90, 205, 0.1);
+        }
+        
+        .version-item.active {
+            border-left: 3px solid var(--primary);
+            background: rgba(106, 90, 205, 0.1);
+            font-weight: bold;
+        }
+        
+        .version-content {
+            flex: 1;
+        }
+        
+        .release-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .release-title {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .release-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .release-version {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .release-highlights {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .change-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .change-item {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .change-type {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            text-align: center;
+            line-height: 24px;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .type-feature { background: var(--feature); }
+        .type-improvement { background: var(--improvement); }
+        .type-fix { background: var(--fix); }
+        .type-deprecated { background: var(--deprecated); }
+        
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .changelog-container {
+                flex-direction: column;
+            }
+            
+            .version-nav {
+                width: 100%;
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pembaruan Shikimori MD</h1>
+        <p>Catatan perubahan dan riwayat versi library</p>
+    </header>
+
+    <div class="changelog-container">
+        <div class="version-nav">
+            <h3>Versi Terbaru</h3>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cari pembaruan...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="feature">Fitur</button>
+                <button class="filter-btn" data-filter="improvement">Perbaikan</button>
+                <button class="filter-btn" data-filter="fix">Perbaikan Bug</button>
+                <button class="filter-btn" data-filter="deprecated">Deprecated</button>
+            </div>
+            <ul class="version-list" id="versionList">
+                <li class="version-item active" data-version="1.2.0">v1.2.0 - Terbaru</li>
+                <li class="version-item" data-version="1.1.3">v1.1.3</li>
+                <li class="version-item" data-version="1.1.0">v1.1.0</li>
+                <li class="version-item" data-version="1.0.0">v1.0.0</li>
+                <li class="version-item" id="showAllVersions">Lihat semua versi...</li>
+            </ul>
+        </div>
+
+        <div class="version-content">
+            <!-- Release v1.2.0 -->
+            <div class="release-card" data-version="1.2.0">
+                <div class="release-header">
+                    <div>
+                        <h2 class="release-title">Peningkatan Performa & Fitur Baru</h2>
+                        <span class="release-date">Dirilis pada 20 Oktober 2023</span>
+                    </div>
+                    <span class="release-version">v1.2.0</span>
+                </div>
+                
+                <div class="release-highlights">
+                    <strong>Highlight Pembaruan:</strong>
+                    <ul>
+                        <li>Peningkatan kecepatan respon API hingga 40%</li>
+                        <li>Dukungan TypeScript secara native</li>
+                        <li>Fitur caching baru untuk performa lebih baik</li>
+                    </ul>
+                </div>
+                
+                <h3>Perubahan</h3>
+                <ul class="change-list">
+                    <li class="change-item" data-change-type="feature">
+                        <span class="change-type type-feature">F</span>
+                        <span>Menambahkan dukungan TypeScript dengan definisi tipe yang lengkap</span>
+                    </li>
+                    <li class="change-item" data-change-type="feature">
+                        <span class="change-type type-feature">F</span>
+                        <span>Implementasi sistem caching otomatis untuk respons API</span>
+                    </li>
+                    <li class="change-item" data-change-type="improvement">
+                        <span class="change-type type-improvement">I</span>
+                        <span>Optimasi performa parsing respons JSON</span>
+                    </li>
+                    <li class="change-item" data-change-type="improvement">
+                        <span class="change-type type-improvement">I</span>
+                        <span>Peningkatan error handling dengan pesan yang lebih deskriptif</span>
+                    </li>
+                    <li class="change-item" data-change-type="fix">
+                        <span class="change-type type-fix">B</span>
+                        <span>Perbaikan bug pada metode pencarian anime dengan karakter spesial</span>
+                    </li>
+                    <li class="change-item" data-change-type="deprecated">
+                        <span class="change-type type-deprecated">D</span>
+                        <span>Metode <code>getLegacyUserData()</code> telah di-deprecate</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Release v1.1.3 -->
+            <div class="release-card hidden" data-version="1.1.3">
+                <div class="release-header">
+                    <div>
+                        <h2 class="release-title">Perbaikan Bug & Peningkatan Stabilitas</h2>
+                        <span class="release-date">Dirilis pada 5 Oktober 2023</span>
+                    </div>
+                    <span class="release-version">v1.1.3</span>
+                </div>
+                
+                <ul class="change-list">
+                    <li class="change-item" data-change-type="fix">
+                        <span class="change-type type-fix">B</span>
+                        <span>Perbaikan memory leak pada instance client</span>
+                    </li>
+                    <li class="change-item" data-change-type="fix">
+                        <span class="change-type type-fix">B</span>
+                        <span>Perbaikan timeout pada request dengan query kompleks</span>
+                    </li>
+                    <li class="change-item" data-change-type="improvement">
+                        <span class="change-type type-improvement">I</span>
+                        <span>Peningkatan dokumentasi untuk metode autentikasi</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Release v1.1.0 -->
+            <div class="release-card hidden" data-version="1.1.0">
+                <div class="release-header">
+                    <div>
+                        <h2 class="release-title">Dukungan Autentikasi & Fitur Baru</h2>
+                        <span class="release-date">Dirilis pada 15 September 2023</span>
+                    </div>
+                    <span class="release-version">v1.1.0</span>
+                </div>
+                
+                <div class="release-highlights">
+                    <strong>Highlight Pembaruan:</strong>
+                    <ul>
+                        <li>Sistem autentikasi OAuth2 yang lebih aman</li>
+                        <li>Dukungan untuk endpoint pengguna terautentikasi</li>
+                        <li>Peningkatan limit rate handling</li>
+                    </ul>
+                </div>
+                
+                <h3>Perubahan</h3>
+                <ul class="change-list">
+                    <li class="change-item" data-change-type="feature">
+                        <span class="change-type type-feature">F</span>
+                        <span>Implementasi autentikasi OAuth2</span>
+                    </li>
+                    <li class="change-item" data-change-type="feature">
+                        <span class="change-type type-feature">F</span>
+                        <span>Menambahkan endpoint baru untuk data pengguna</span>
+                    </li>
+                    <li class="change-item" data-change-type="improvement">
+                        <span class="change-type type-improvement">I</span>
+                        <span>Peningkatan handling rate limit dengan retry otomatis</span>
+                    </li>
+                    <li class="change-item" data-change-type="fix">
+                        <span class="change-type type-fix">B</span>
+                        <span>Perbaikan pagination pada hasil pencarian</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Release v1.0.0 -->
+            <div class="release-card hidden" data-version="1.0.0">
+                <div class="release-header">
+                    <div>
+                        <h2 class="release-title">Rilis Stabil Pertama</h2>
+                        <span class="release-date">Dirilis pada 1 Agustus 2023</span>
+                    </div>
+                    <span class="release-version">v1.0.0</span>
+                </div>
+                
+                <div class="release-highlights">
+                    <strong>Highlight Pembaruan:</strong>
+                    <ul>
+                        <li>Rilis stabil pertama Shikimori MD</li>
+                        <li>Dukungan lengkap untuk API Shikimori</li>
+                        <li>Dokumentasi komprehensif</li>
+                    </ul>
+                </div>
+                
+                <h3>Perubahan</h3>
+                <ul class="change-list">
+                    <li class="change-item" data-change-type="feature">
+                        <span class="change-type type-feature">F</span>
+                        <span>Implementasi semua endpoint dasar Shikimori API</span>
+                    </li>
+                    <li class="change-item" data-change-type="feature">
+                        <span class="change-type type-feature">F</span>
+                        <span>Dokumentasi lengkap dengan contoh penggunaan</span>
+                    </li>
+                    <li class="change-item" data-change-type="improvement">
+                        <span class="change-type type-improvement">I</span>
+                        <span>Struktur kode yang terorganisir dengan baik</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemen DOM
+            const versionItems = document.querySelectorAll('.version-item');
+            const releaseCards = document.querySelectorAll('.release-card');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const searchInput = document.getElementById('searchInput');
+            const showAllBtn = document.getElementById('showAllVersions');
+            
+            // Versi yang tersedia
+            const allVersions = ['1.2.0', '1.1.3', '1.1.2', '1.1.1', '1.1.0', '1.0.0'];
+            let showAll = false;
+            
+            // Filter aktif
+            let activeFilter = 'all';
+            let searchQuery = '';
+            
+            // Navigasi versi
+            versionItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.id === 'showAllVersions') {
+                        showAll = !showAll;
+                        updateVersionList();
+                        this.textContent = showAll ? 'Sembunyikan versi lama' : 'Lihat semua versi...';
+                        return;
+                    }
+                    
+                    // Update active class
+                    versionItems.forEach(v => v.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Tampilkan release card yang sesuai
+                    const version = this.dataset.version;
+                    releaseCards.forEach(card => {
+                        if (card.dataset.version === version) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Terapkan filter dan pencarian
+                    applyFilters();
+                });
+            });
+            
+            // Filter perubahan
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilter = this.dataset.filter;
+                    applyFilters();
+                });
+            });
+            
+            // Pencarian
+            searchInput.addEventListener('input', function() {
+                searchQuery = this.value.toLowerCase();
+                applyFilters();
+            });
+            
+            // Fungsi untuk update daftar versi
+            function updateVersionList() {
+                versionItems.forEach((item, index) => {
+                    if (index < versionItems.length - 1) { // Skip "show all" button
+                        const version = item.dataset.version;
+                        if (showAll || version === '1.2.0' || version === '1.1.3' || version === '1.1.0' || version === '1.0.0') {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            }
+            
+            // Fungsi untuk menerapkan filter dan pencarian
+            function applyFilters() {
+                const visibleCards = document.querySelectorAll('.release-card:not(.hidden)');
+                
+                visibleCards.forEach(card => {
+                    let hasVisibleChanges = false;
+                    const changeItems = card.querySelectorAll('.change-item');
+                    
+                    changeItems.forEach(item => {
+                        const matchesFilter = activeFilter === 'all' || item.dataset.changeType === activeFilter;
+                        const matchesSearch = searchQuery === '' || 
+                            item.textContent.toLowerCase().includes(searchQuery);
+                        
+                        if (matchesFilter && matchesSearch) {
+                            item.style.display = 'flex';
+                            hasVisibleChanges = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Sembunyikan bagian perubahan jika tidak ada yang sesuai
+                    const changeList = card.querySelector('.change-list');
+                    if (hasVisibleChanges) {
+                        changeList.style.display = 'block';
+                    } else {
+                        changeList.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Inisialisasi
+            updateVersionList();
+        });
+    </script>
+</body>
+</html>

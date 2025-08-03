@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Shikimori MD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a148c;
+            --secondary: #7b1fa2;
+            --accent: #e91e63;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        .shikimori-contact {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .team-info {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-info::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -50px;
+            right: -50px;
+        }
+        
+        .team-info::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -50px;
+            right: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, white, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .team-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .team-info h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent);
+            bottom: -8px;
+            left: 0;
+            border-radius: 3px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+        
+        .info-item i {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 40px;
+        }
+        
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .contact-form {
+            padding: 40px;
+        }
+        
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-form h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent);
+            bottom: -8px;
+            left: 0;
+            border-radius: 3px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 31, 162, 0.4);
+        }
+        
+        .submit-btn i {
+            margin-left: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .shikimori-contact {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-info, .contact-form {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shikimori-contact">
+        <div class="team-info">
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA7BjO9O_0nid2n8twhyeLQHrhwwTZFTb2LoJDKfThnNKFs3BaTLC02LYD&s=10" alt="Shikimori MD Logo">
+                <h2>Shikimori MD</h2>
+            </div>
+            
+            <h3>Tim Kami</h3>
+            <p>Hubungi tim Shikimori MD atau pemilik Lyora untuk pertanyaan, kolaborasi, atau dukungan.</p>
+            
+            <div class="info-item">
+                <i class="fas fa-user"></i>
+                <div>
+                    <h4>Lyora (Pemilik)</h4>
+                    <p>Pemilik Shikimori MD</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h4>Email</h4>
+                    <p>lyora@shikimori-md.com</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <div>
+                    <h4>Tim Support</h4>
+                    <p>support@shikimori-md.com</p>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        
+        <div class="contact-form">
+            <h3>Kirim Pesan</h3>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Nama Anda</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subjek</label>
+                    <select id="subject" name="subject" class="form-control" required>
+                        <option value="" disabled selected>Pilih subjek</option>
+                        <option value="support">Support Teknis</option>
+                        <option value="collab">Kolaborasi</option>
+                        <option value="report">Laporan Bug</option>
+                        <option value="other">Lainnya</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Pesan Anda</label>
+                    <textarea id="message" name="message" class="form-control" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    Kirim Pesan <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

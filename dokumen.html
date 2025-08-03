@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikimori MD - Documentation</title>
+    <style>
+        :root {
+            --primary: #6a5acd;
+            --secondary: #9370db;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+            --text: #333333;
+            --text-light: #555555;
+            --code-dark: #2d2d2d;
+            --code-light: #f8f8f2;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .tagline {
+            font-weight: 300;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .logo {
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+        
+        section {
+            background: white;
+            color: var(--text);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: var(--dark);
+            margin-top: 1.5rem;
+        }
+        
+        code {
+            background: #f4f4f4;
+            color: var(--text);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        pre {
+            background: var(--code-dark);
+            color: var(--code-light);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        
+        .endpoint {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            color: white;
+        }
+        
+        .get { background: #61affe; }
+        .post { background: #49cc90; }
+        .put { background: #fca130; }
+        .delete { background: #f93e3e; }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: var(--text-light);
+        }
+        
+        .note {
+            background: #fff8e1;
+            border-left: 4px solid #ffd54f;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: var(--text);
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--secondary), transparent);
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+<h1>Shikimori MD</h1>
+<p class="tagline">A powerful JavaScript wrapper for the Shikimori API</p>
+</header>
+
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p>Shikimori MD is a modern JavaScript library that provides easy access to the Shikimori API, allowing developers to fetch anime, manga, and user-related data with minimal setup.</p>
+        
+        <div class="note">
+            <strong>Note:</strong> This library requires Node.js 14+ or modern browser with ES6 support.
+        </div>
+    </section>
+
+    <section id="installation">
+        <h2>Installation</h2>
+        <h3>Using yarn</h3>
+        <pre><code>yarn add shikimori-md</code></pre>
+        
+        <h3>Using npm</h3>
+        <pre><code>npm install shikimori-md</code></pre>
+        
+        <h3>CDN (Browser)</h3>
+        <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/shikimori-md@latest/dist/shikimori-md.min.js"&gt;&lt;/script&gt;</code></pre>
+    </section>
+
+    <hr>
+
+    <section id="quick-start">
+        <h2>Quick Start</h2>
+        <pre><code>// ES6 Import
+import Shikimori from 'shikimori-md';
+
+// CommonJS
+const Shikimori = require('shikimori-md');
+
+// Initialize
+const shiki = new Shikimori();
+
+// Get anime by ID
+shiki.anime.getById(1)
+    .then(anime => console.log(anime))
+    .catch(err => console.error(err));</code></pre>
+    </section>
+
+    <section id="api-reference">
+        <h2>API Reference</h2>
+        
+        <h3>Anime</h3>
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/anime/:id</strong>
+            <p>Get anime by ID</p>
+            <pre><code>shiki.anime.getById(id);</code></pre>
+        </div>
+        
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/anime/search</strong>
+            <p>Search anime by query</p>
+            <pre><code>shiki.anime.search({ q: 'Naruto', limit: 5 });</code></pre>
+        </div>
+        
+        <h3>Manga</h3>
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/manga/:id</strong>
+            <p>Get manga by ID</p>
+            <pre><code>shiki.manga.getById(id);</code></pre>
+        </div>
+        
+        <h3>Users</h3>
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/users/:id</strong>
+            <p>Get user by ID or nickname</p>
+            <pre><code>shiki.users.getById('username');</code></pre>
+        </div>
+    </section>
+
+    <section id="authentication">
+        <h2>Authentication</h2>
+        <p>For authorized endpoints, you need to initialize the client with your OAuth credentials:</p>
+        <pre><code>const shiki = new Shikimori({
+    clientId: 'YOUR_CLIENT_ID',
+    clientSecret: 'YOUR_CLIENT_SECRET',
+    redirectUri: 'YOUR_REDIRECT_URI'
+});</code></pre>
+    </section>
+
+    <footer>
+        <p>© 2023 Shikimori MD | Documentation v1.0.0</p>
+    </footer>
+</body>
+</html>

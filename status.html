@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikimori MD - Status Layanan</title>
+    <style>
+        :root {
+            --primary: #6a5acd;
+            --secondary: #9370db;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
+            --info: #2196F3;
+            --text: #333333;
+            --text-light: #666666;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .status-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .status-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .status-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+        
+        .status-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-ok { color: var(--success); }
+        .status-warning { color: var(--warning); }
+        .status-error { color: var(--danger); }
+        
+        .incident-list {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .incident {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .incident:last-child {
+            border-bottom: none;
+        }
+        
+        .incident-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .resolved { background: var(--success); color: white; }
+        .investigating { background: var(--warning); color: var(--dark); }
+        .outage { background: var(--danger); color: white; }
+        .maintenance { background: var(--info); color: white; }
+        
+        .incident-title {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .incident-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .incident-desc {
+            margin-bottom: 0.5rem;
+        }
+        
+        .last-updated {
+            text-align: right;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .all-operational {
+            background: var(--success);
+            color: white;
+        }
+        
+        .component-status {
+            margin-top: 2rem;
+        }
+        
+        .component {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+        
+        .component-name {
+            font-weight: 500;
+        }
+        
+        .component-status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .operational { background: #E8F5E9; color: var(--success); }
+        .degraded { background: #FFF8E1; color: var(--warning); }
+        .down { background: #FFEBEE; color: var(--danger); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Status Layanan Shikimori MD</h1>
+        <p>Informasi terbaru tentang ketersediaan dan performa layanan kami</p>
+    </header>
+
+    <div class="status-header">
+        <h2>Ringkasan Status</h2>
+        <span class="status-badge all-operational">
+            Semua Sistem Beroperasi
+        </span>
+    </div>
+
+    <div class="status-overview">
+        <div class="status-card">
+            <div class="status-title">API Status</div>
+            <div class="status-value status-ok">Operasional</div>
+            <div>100% uptime 30 hari terakhir</div>
+        </div>
+        
+        <div class="status-card">
+            <div class="status-title">Database</div>
+            <div class="status-value status-ok">Normal</div>
+            <div>Response time 42ms</div>
+        </div>
+        
+        <div class="status-card">
+            <div class="status-title">Pemakaian API</div>
+            <div class="status-value">1.2M</div>
+            <div>Permintaan hari ini</div>
+        </div>
+        
+        <div class="status-card">
+            <div class="status-title">Waktu Respon</div>
+            <div class="status-value status-ok">128ms</div>
+            <div>Rata-rata 24 jam terakhir</div>
+        </div>
+    </div>
+
+    <div class="component-status">
+        <h2>Status Komponen</h2>
+        <div class="component">
+            <span class="component-name">API Inti</span>
+            <span class="component-status-badge operational">Operasional</span>
+        </div>
+        <div class="component">
+            <span class="component-name">Autentikasi</span>
+            <span class="component-status-badge operational">Operasional</span>
+        </div>
+        <div class="component">
+            <span class="component-name">Database Anime</span>
+            <span class="component-status-badge operational">Operasional</span>
+        </div>
+        <div class="component">
+            <span class="component-name">Database Manga</span>
+            <span class="component-status-badge operational">Operasional</span>
+        </div>
+        <div class="component">
+            <span class="component-name">CDN</span>
+            <span class="component-status-badge operational">Operasional</span>
+        </div>
+    </div>
+
+    <div class="incident-list">
+        <h2>Insiden Terakhir</h2>
+        
+        <div class="incident">
+            <span class="incident-status resolved">Selesai</span>
+            <span class="incident-date">15 Oktober 2023 • 14:30 - 15:45 WIB</span>
+            <div class="incident-title">Gangguan Database Sekunder</div>
+            <div class="incident-desc">
+                Kami mengalami masalah pada database sekunder yang menyebabkan peningkatan waktu respon. 
+                Sistem telah kembali normal setelah maintenance selama 1 jam 15 menit.
+            </div>
+        </div>
+        
+        <div class="incident">
+            <span class="incident-status resolved">Selesai</span>
+            <span class="incident-date">5 Oktober 2023 • 03:00 - 05:00 WIB</span>
+            <div class="incident-title">Maintenance Terjadwal</div>
+            <div class="incident-desc">
+                Maintenance terjadwal untuk upgrade infrastruktur. Selama periode ini, 
+                layanan mungkin tidak tersedia atau mengalami gangguan.
+            </div>
+        </div>
+        
+        <div class="last-updated">
+            Terakhir diperbarui: 20 Oktober 2023 09:15 WIB
+        </div>
+    </div>
+</body>
+</html>

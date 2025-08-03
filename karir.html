@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karir - Shikimori-MD Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --danger: #d63031;
+            --warning: #fdcb6e;
+            --info: #0984e3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIcAysi6q9A9K-7DcDpmiVu3Kzy1ZH15DZu1vKIYIQ3TehvfRsJPPjjBY&s=10');
+            background-repeat: repeat;
+            background-size: 150px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .logo-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: white;
+            color: var(--primary);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .career-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .job-listings {
+            margin-top: 40px;
+        }
+        
+        .job-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .job-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .job-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .job-type {
+            background-color: var(--light);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .job-type.remote {
+            background-color: #e3f2fd;
+            color: var(--info);
+        }
+        
+        .job-type.full-time {
+            background-color: #e8f5e9;
+            color: var(--success);
+        }
+        
+        .job-type.internship {
+            background-color: #fff8e1;
+            color: var(--warning);
+        }
+        
+        .job-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .job-meta-item i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        .job-description {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .job-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .skill-tag {
+            background-color: #f1f2f6;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .apply-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .apply-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(108, 92, 231, 0.3);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--secondary);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .culture-section {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            align-items: center;
+        }
+        
+        .culture-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .culture-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .culture-content {
+            flex: 1;
+        }
+        
+        .testimonial {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-top: 40px;
+            position: relative;
+            border: 1px solid #eee;
+        }
+        
+        .testimonial:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(108, 92, 231, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 2;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid var(--light);
+        }
+        
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 992px) {
+            .culture-section {
+                flex-direction: column;
+            }
+            
+            .culture-image, .culture-content {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .job-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .career-section {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo img {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-pattern"></div>
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJrKtF23rVOwUB6SKJ6D_D7aLawCuztC0O72s9SRAdggKzZkRr7nE7Z5g&s=10" alt="Shikimori-MD Logo">
+                <div class="logo-text">
+                    <h1>Karir di Shikimori-MD</h1>
+                    <p>Bergabunglah dengan tim pengembang bot anime terbaik</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="career-section">
+            <h2 class="section-title">Kenapa Bergabung Dengan Kami?</h2>
+            <p>Shikimori-MD adalah proyek yang lahir dari kecintaan terhadap anime dan teknologi. Dibawah kepemimpinan Lyora, kami telah menciptakan salah satu bot WhatsApp anime paling populer dengan lebih dari 24,000 pengguna aktif. Kami mencari talenta-talenta baru yang bersemangat untuk mengembangkan ekosistem anime digital bersama kami.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="benefit-title">Teknologi Mutakhir</h3>
+                    <p>Bekerja dengan teknologi terkini dalam pengembangan bot dan sistem rekomendasi anime berbasis AI.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="benefit-title">Tim yang Solid</h3>
+                    <p>Bergabung dengan tim kecil yang dinamis di mana setiap kontribusi Anda berarti dan dihargai.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="benefit-title">Fleksibilitas Waktu</h3>
+                    <p>Kami menawarkan jam kerja fleksibel dan opsi kerja remote penuh untuk semua posisi.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="benefit-title">Pengembangan Diri</h3>
+                    <p>Program pelatihan dan konferensi untuk mendukung pertumbuhan profesional Anda.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="benefit-title">Budaya Anime</h3>
+                    <p>Lingkungan kerja yang menyenangkan dengan koleksi manga dan diskusi anime rutin.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3 class="benefit-title">Kompensasi Menarik</h3>
+                    <p>Paket gaji kompetitif dan bonus kinerja berdasarkan kontribusi proyek.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="career-section">
+            <h2 class="section-title">Budaya Kami</h2>
+            
+            <div class="culture-section">
+                <div class="culture-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA3TIaK-Kz_I0tuQzFfKQSS9fIe6Po31CK8HiAQfLKD9C4j6HZityr1el8&s=10" alt="Tim Shikimori-MD">
+                </div>
+                <div class="culture-content">
+                    <p>Di Shikimori-MD, kami percaya bahwa kerja keras dan kecintaan terhadap anime bisa berjalan beriringan. Kami membangun budaya kerja yang:</p>
+                    <ul style="margin: 20px 0; padding-left: 20px;">
+                        <li style="margin-bottom: 10px;">Menghargai kreativitas dan inovasi</li>
+                        <li style="margin-bottom: 10px;">Mendorong kolaborasi tim yang erat</li>
+                        <li style="margin-bottom: 10px;">Memprioritaskan keseimbangan kerja-hidup</li>
+                        <li style="margin-bottom: 10px;">Selalu belajar dan berkembang bersama</li>
+                        <li>Menjaga semangat komunitas anime yang positif</li>
+                    </ul>
+                    <p>Lyora sebagai pemimpin tim selalu mendorong anggota untuk mengembangkan ide-ide baru dan mengambil kepemilikan atas proyek mereka.</p>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p class="testimonial-content">"Bergabung dengan tim Shikimori-MD adalah pengalaman terbaik dalam karir saya. Saya tidak hanya bekerja dengan teknologi canggih, tapi juga bersama orang-orang yang berbagi passion yang sama terhadap anime. Lyora adalah pemimpin yang inspiratif yang selalu mendorong kami untuk berkembang."</p>
+                <div class="testimonial-author">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyRenu-b7E8mN3qxePBweNTHXBHNwxHM3-aw&s" alt="Vina">
+                    <div class="author-info">
+                        <h4>Vina</h4>
+                        <p>UI/UX Designer, bergabung sejak 2022</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="career-section">
+            <h2 class="section-title">Lowongan Pekerjaan</h2>
+            <p>Kami sedang mencari talenta-talenta berbakat untuk bergabung dengan tim pengembangan Shikimori-MD. Lihat posisi yang tersedia di bawah ini:</p>
+            
+            <div class="job-listings">
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Backend Developer</h3>
+                        <span class="job-type remote">Remote</span>
+                    </div>
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Full-time</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Anywhere (Remote)</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Kami mencari Backend Developer berpengalaman untuk mengembangkan dan memelihara sistem inti Shikimori-MD. Anda akan bekerja langsung dengan Lyora dalam mengoptimalkan performa bot dan mengimplementasikan fitur-fitur baru.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">API Design</span>
+                    </div>
+                    <a href="#" class="apply-button">Apply Now</a>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Anime Data Specialist</h3>
+                        <span class="job-type remote">Remote</span>
+                    </div>
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Part-time</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Anywhere (Remote)</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 1 week ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Cari seseorang yang memiliki pengetahuan mendalam tentang anime dan manga untuk mengelola dan memperbarui database kami. Anda akan bertanggung jawab memastikan semua informasi anime dan manga akurat dan up-to-date.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Pengetahuan Anime</span>
+                        <span class="skill-tag">Research</span>
+                        <span class="skill-tag">Data Entry</span>
+                        <span class="skill-tag">Japanese (Basic)</span>
+                    </div>
+                    <a href="#" class="apply-button">Apply Now</a>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Frontend Developer (Analytics)</h3>
+                        <span class="job-type full-time">Full-time</span>
+                    </div>
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Full-time</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote (Preferred GMT+7)</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 3 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Kembangkan dan tingkatkan dashboard analitik Shikimori-MD. Anda akan membuat visualisasi data yang menarik dan interaktif untuk membantu kami memahami perilaku pengguna dan meningkatkan pengalaman bot.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">Chart.js</span>
+                        <span class="skill-tag">D3.js</span>
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Data Visualization</span>
+                    </div>
+                    <a href="#" class="apply-button">Apply Now</a>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Community Manager</h3>
+                        <span class="job-type full-time">Full-time</span>
+                    </div>
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Full-time</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 5 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Jadi penghubung antara tim Shikimori-MD dan komunitas pengguna kami. Anda akan mengelola media sosial, merespons pertanyaan pengguna, dan membantu menciptakan pengalaman komunitas yang positif.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Komunikasi</span>
+                        <span class="skill-tag">Social Media</span>
+                        <span class="skill-tag">Customer Support</span>
+                        <span class="skill-tag">Pengetahuan Anime</span>
+                        <span class="skill-tag">Bahasa Inggris</span>
+                    </div>
+                    <a href="#" class="apply-button">Apply Now</a>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">AI/ML Engineer Intern</h3>
+                        <span class="job-type internship">Internship</span>
+                    </div>
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Internship</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 1 week ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Peluang magang untuk mahasiswa yang tertarik mengembangkan sistem rekomendasi anime berbasis machine learning. Anda akan belajar langsung dari Lyora dan tim inti kami.</p>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Recommendation Systems</span>
+                        <span class="skill-tag">Pembelajaran Cepat</span>
+                    </div>
+                    <a href="#" class="apply-button">Apply Now</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="career-section">
+            <h2 class="section-title">Proses Rekrutmen</h2>
+            <p>Kami ingin memastikan proses rekrutmen yang transparan dan adil untuk semua kandidat. Berikut adalah tahapan yang akan Anda lalui:</p>
+            
+            <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px;">
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="background-color: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+                    <div>
+                        <h3 style="margin-bottom: 5px;">Aplikasi Online</h3>
+                        <p>Kirim CV dan portfolio Anda melalui formulir aplikasi online. Pastikan untuk menyertakan proyek-proyek relevan yang pernah Anda kerjakan.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="background-color: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+                    <div>
+                        <h3 style="margin-bottom: 5px;">Screening Awal</h3>
+                        <p>Tim kami akan meninjau aplikasi Anda dan menghubungi kandidat terpilih dalam waktu 7-10 hari kerja.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="background-color: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+                    <div>
+                        <h3 style="margin-bottom: 5px;">Wawancara Teknis</h3>
+                        <p>Anda akan berbicara dengan Lyora dan anggota tim terkait untuk mendiskusikan keterampilan dan pengalaman Anda.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="background-color: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</div>
+                    <div>
+                        <h3 style="margin-bottom: 5px;">Tes Praktik</h3>
+                        <p>Untuk posisi teknis, Anda mungkin diminta menyelesaikan tes coding atau tugas desain kecil.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="background-color: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</div>
+                    <div>
+                        <h3 style="margin-bottom: 5px;">Penawaran</h3>
+                        <p>Kandidat terpilih akan menerima penawaran bergabung dengan tim Shikimori-MD!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px; font-style: italic; color: #666;">Kami menghargai setiap aplikasi yang masuk. Meskipun kami tidak dapat membalas setiap kandidat, kami akan menghubungi Anda jika profil Anda sesuai dengan kebutuhan kami.</p>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="copyright">© 2023 Shikimori-MD Bot. Dibuat dengan ❤ oleh Lyora dan Tim Shikimori. All rights reserved.</p>
+    </footer>
+</body>
+</html>

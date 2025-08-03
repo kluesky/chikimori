@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikimori MD - WhatsApp Bot Canggih</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="https://i.ibb.co/0jQ7ZQx/shikimori-icon.png" type="image/png">
+</head>
+<body>
+    <!-- Audio Element for Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/iboiff.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Music Control Button -->
+    <div class="music-control">
+        <button id="musicToggle" title="Toggle Music">
+            <i class="fas fa-music"></i>
+        </button>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">
+            <div class="loader-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="loader-text">Shikimori MD</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Shikimori MD</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features"><i class="fas fa-star"></i> Fitur</a></li>
+                    <li><a href="#how-it-works"><i class="fas fa-cogs"></i> Cara Kerja</a></li>
+                    <li><a href="#pricing"><i class="fas fa-tags"></i> Harga</a></li>
+                    <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimoni</a></li>
+                    <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="particles" id="particles-js"></div>
+        <div class="container">
+<div class="hero-content fade-in">
+    <h1>WhatsApp Bot <span class="highlight">Generasi Baru</span></h1>
+    <p class="subtitle">Shikimori MD membawa pengalaman otomatisasi WhatsApp ke level berikutnya dengan teknologi AI canggih dan fitur premium.</p>
+    <div class="btn-group">
+        <a href="#contact" class="btn pulse"><i class="fab fa-whatsapp"></i> Daftar Sekarang</a>
+        <a href="#demo" class="btn btn-outline"><i class="fas fa-play"></i> Lihat Demo</a>
+    </div>
+    <div class="scroll-down">
+        <span>Scroll untuk eksplorasi</span>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Fitur <span class="highlight">Premium</span></h2>
+                <p>Nikmati berbagai fitur canggih yang akan meningkatkan produktivitas bisnis Anda</p>
+            </div>
+            <div class="features">
+                <!-- Feature cards will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Cara <span class="highlight">Menggunakan</span></h2>
+                <p>Hanya perlu 3 langkah sederhana untuk mulai menggunakan Shikimori MD</p>
+            </div>
+            <div class="steps">
+                <!-- Steps will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Demo <span class="highlight">Shikimori MD</span></h2>
+                <p>Lihat langsung bagaimana bot kami bekerja</p>
+            </div>
+            <div class="video-container fade-in delay-1">
+                <div class="video-wrapper">
+                    <iframe src="https://youtu.be/kWQYro-DpKU?si=hQWSkiB_2PgomrGB" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="pricing" class="pricing">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Paket <span class="highlight">Harga</span></h2>
+            <p>Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
+        </div>
+        <div class="pricing-cards">
+            <!-- Pricing cards will be loaded by JavaScript -->
+        </div>
+    </div>
+</section>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Apa Kata <span class="highlight">Mereka?</span></h2>
+                <p>Testimoni dari pengguna Shikimori MD</p>
+            </div>
+            <div class="testimonial-slider fade-in delay-1">
+                <div class="testimonial-track">
+                    <!-- Testimonials will be loaded by JavaScript -->
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Pertanyaan <span class="highlight">Umum</span></h2>
+                <p>Temukan jawaban untuk pertanyaan umum tentang Shikimori MD</p>
+            </div>
+            <div class="accordion">
+                <!-- FAQ items will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Hubungi <span class="highlight">Kami</span></h2>
+                <p>Punya pertanyaan lebih lanjut? Tim kami siap membantu Anda</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info fade-in delay-1">
+                    <h3>Mari Berbicara</h3>
+                    <p>Isi formulir atau hubungi kami langsung untuk informasi lebih lanjut tentang Shikimori MD dan bagaimana kami bisa membantu bisnis Anda tumbuh.</p>
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>support@shikimorimd.id</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Jl. Teknologi No. 42, Jakarta Selatan, Indonesia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in delay-2">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Nama Anda" required>
+                        <input type="email" placeholder="Email Anda" required>
+                        <input type="tel" placeholder="Nomor WhatsApp">
+                        <textarea placeholder="Pesan Anda" required></textarea>
+                        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/628560637364" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Shikimori MD</h3>
+                    <p>Solusi otomatisasi WhatsApp terbaik untuk bisnis Anda. Meningkatkan efisiensi dan pengalaman pelanggan dengan teknologi canggih.</p>
+                    <div class="social-links">
+                        <a href="https://t.me/Seirennnnnn_bot"><i class="fab fa-telegram"></i></a>
+                        <a href="https://x.com/1kKyluesky?t=leAaGH45mUe9aHfpkNhDwg&s=09"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/krebskrum1"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/kyluesky"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Fitur</h3>
+                    <ul>
+                        <li><a href="aichat.html"><i class="fas fa-chevron-right"></i> AI Chatbot</a></li>
+                        <li><a href="broadcast.html"><i class="fas fa-chevron-right"></i> Broadcast Pesan</a></li>
+                        <li><a href="manajemen.html"><i class="fas fa-chevron-right"></i> Manajemen Grup</a></li>
+                        <li><a href="api.html"><i class="fas fa-chevron-right"></i> Integrasi API</a></li>
+                        <li><a href="analitik.html"><i class="fas fa-chevron-right"></i> Analitik Canggih</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Perusahaan</h3>
+                    <ul>
+                        <li><a href="tentangkami.html"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
+                        <li><a href="karir.html"><i class="fas fa-chevron-right"></i> Karir</a></li>
+                        <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                        <li><a href="shiki.html"><i class="fas fa-chevron-right"></i> Kebijakan Privasi</a></li>
+                        <li><a href="layanan.html"><i class="fas fa-chevron-right"></i> Syarat Layanan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Dukungan</h3>
+                    <ul>
+                        <li><a href="bantuan.html"><i class="fas fa-chevron-right"></i> Pusat Bantuan</a></li>
+                        <li><a href="dokumen.html"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                        <li><a href="status.html"><i class="fas fa-chevron-right"></i> Status Layanan</a></li>
+                        <li><a href="update.html"><i class="fas fa-chevron-right"></i> Pembaruan</a></li>
+                        <li><a href="kontak.html"><i class="fas fa-chevron-right"></i> Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="year"></span> Shikimori MD. Semua hak dilindungi.</p>
+                <div class="footer-badges">
+                    <span class="badge"><i class="fas fa-shield-alt"></i> Aman & Terenkripsi</span>
+                    <span class="badge"><i class="fas fa-bolt"></i> Cepat & Stabil</span>
+                    <span class="badge"><i class="fas fa-headset"></i> Dukungan 24/7</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/script.js"></script>
+    
+    <!-- Music Control Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgMusic = document.getElementById('bgMusic');
+            const musicToggle = document.getElementById('musicToggle');
+            
+            // Set volume to 50% by default to not be too loud
+            bgMusic.volume = 0.5;
+            
+            // Try to autoplay (may be blocked by browser)
+            bgMusic.play().catch(e => {
+                console.log("Autoplay was prevented. User interaction required.");
+            });
+            
+            // Toggle music play/pause
+            musicToggle.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+                } else {
+                    bgMusic.pause();
+                    musicToggle.innerHTML = '<i class="fas fa-music-slash"></i>';
+                }
+            });
+            
+            // Add visual feedback when music is playing
+            setInterval(() => {
+                if (!bgMusic.paused) {
+                    musicToggle.classList.toggle('pulse');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
