@@ -7,94 +7,209 @@
     <style>
         :root {
             --primary: #6a45d1;
+            --primary-light: #8a6dff;
             --secondary: #4a2db8;
             --dark: #1a1a2e;
+            --darker: #0f0f1f;
             --light: #f8f9fa;
+            --lighter: #ffffff;
             --accent: #ff7e5f;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
         }
         
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.8;
-            color: #333;
-            background-color: #f5f5ff;
+            color: var(--text);
+            background-color: #f5f7ff;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
         
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 30px;
-            background-color: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-radius: 15px;
-            margin-top: 30px;
-            margin-bottom: 50px;
+            padding: 0;
+            background-color: var(--lighter);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(106, 69, 209, 0.1);
+            margin-top: 40px;
+            margin-bottom: 60px;
+            overflow: hidden;
         }
         
         header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--primary);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: var(--lighter);
+            transform: skewY(-2deg);
+            z-index: 1;
         }
         
         h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            color: white;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .last-updated {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+        
+        .content {
+            padding: 0 3rem 3rem;
         }
         
         h2 {
             color: var(--secondary);
-            margin-top: 30px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            margin-top: 3rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            font-size: 1.8rem;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--primary);
         }
         
         h3 {
-            color: var(--dark);
-            margin-top: 25px;
+            color: var(--primary);
+            margin-top: 2.5rem;
+            font-weight: 600;
+            font-size: 1.4rem;
         }
         
-        .last-updated {
-            color: #666;
-            font-style: italic;
-            margin-bottom: 30px;
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text);
         }
         
         ol, ul {
-            padding-left: 25px;
+            padding-left: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         
         li {
-            margin-bottom: 10px;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: var(--text);
         }
         
-        .highlight {
+        ul li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        ol {
+            counter-reset: item;
+        }
+        
+        ol li {
+            counter-increment: item;
+        }
+        
+        ol li::before {
+            content: counter(item) ".";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -1.8rem;
+        }
+        
+        .highlight-box {
             background-color: #f8f4ff;
-            padding: 15px;
+            padding: 1.5rem;
             border-left: 4px solid var(--primary);
-            margin: 20px 0;
-            border-radius: 0 5px 5px 0;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(106, 69, 209, 0.05);
+        }
+        
+        .highlight-box strong {
+            color: var(--secondary);
+        }
+        
+        .contact-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .contact-item strong {
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 0.5rem;
         }
         
         footer {
             text-align: center;
-            padding: 20px;
-            color: #666;
+            padding: 2rem;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
         
         @media (max-width: 768px) {
             .container {
-                padding: 20px;
-                margin: 15px;
+                margin: 20px;
+                border-radius: 12px;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 0 1.5rem 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -106,85 +221,114 @@
             <p class="last-updated">Terakhir diperbarui: 15 November 2023</p>
         </header>
         
-        <section>
-            <p>Dengan menggunakan bot Shikimori-MD ("Bot"), Anda setuju untuk terikat oleh Syarat Layanan ini. Harap baca dengan seksama sebelum menggunakan layanan kami.</p>
+        <div class="content">
+            <section>
+                <p>Dengan menggunakan bot Shikimori-MD ("Bot"), Anda setuju untuk terikat oleh Syarat Layanan ini. Harap baca dengan seksama sebelum menggunakan layanan kami.</p>
+                
+                <div class="highlight-box">
+                    <strong>CATATAN PENTING:</strong> Penggunaan Bot ini sepenuhnya tanggung jawab pengguna. Kami tidak bertanggung jawab atas penyalahgunaan atau pelanggaran yang dilakukan pengguna.
+                </div>
+            </section>
             
-            <div class="highlight">
-                <strong>CATATAN PENTING:</strong> Penggunaan Bot ini sepenuhnya tanggung jawab pengguna. Kami tidak bertanggung jawab atas penyalahgunaan atau pelanggaran yang dilakukan pengguna.
-            </div>
-        </section>
-        
-        <section>
-            <h2>1. Persyaratan Penggunaan</h2>
+            <section>
+                <h2>1. Persyaratan Penggunaan</h2>
+                
+                <h3>1.1 Ketentuan Umum</h3>
+                <ul>
+                    <li>Bot ini ditujukan untuk pengguna berusia minimal 13 tahun atau sesuai dengan ketentuan hukum setempat yang berlaku</li>
+                    <li>Pengguna bertanggung jawab penuh atas semua aktivitas yang dilakukan melalui akun mereka</li>
+                    <li>Dilarang keras menggunakan Bot untuk aktivitas ilegal atau melanggar hukum yang berlaku</li>
+                    <li>Pengguna wajib mematuhi semua peraturan dan kebijakan platform WhatsApp</li>
+                </ul>
+                
+                <h3>1.2 Pembatasan Penggunaan</h3>
+                <p>Anda setuju untuk TIDAK:</p>
+                <ol>
+                    <li>Menggunakan Bot untuk spam, flood pesan, atau aktivitas yang mengganggu pengguna lain</li>
+                    <li>Memanipulasi, membobol, atau mencoba meretas sistem Bot dengan cara apapun</li>
+                    <li>Menyebarkan konten ilegal, pornografi, kekerasan, atau materi yang melanggar hak cipta</li>
+                    <li>Melakukan aktivitas yang dapat membebani server atau mengganggu stabilitas layanan</li>
+                    <li>Menggunakan Bot untuk penipuan, phishing, atau aktivitas pencurian identitas</li>
+                    <li>Menyalahgunakan fitur Bot untuk tujuan komersial tanpa izin tertulis</li>
+                </ol>
+            </section>
             
-            <h3>1.1 Ketentuan Umum</h3>
-            <ul>
-                <li>Bot ini ditujukan untuk pengguna berusia minimal 13 tahun</li>
-                <li>Pengguna bertanggung jawab penuh atas aktivitas yang dilakukan melalui Bot</li>
-                <li>Dilarang menggunakan Bot untuk aktivitas ilegal atau melanggar hukum</li>
-            </ul>
+            <section>
+                <h2>2. Privasi dan Keamanan</h2>
+                
+                <h3>2.1 Data Pengguna</h3>
+                <p>Untuk menyediakan layanan yang optimal, kami dapat menyimpan data berikut:</p>
+                <ul>
+                    <li>Nomor telepon dan informasi profil dasar pengguna</li>
+                    <li>Pesan, perintah, dan interaksi yang dikirim ke Bot</li>
+                    <li>Data penggunaan dan log aktivitas untuk keperluan analitik</li>
+                    <li>Informasi teknis seperti perangkat, versi aplikasi, dan alamat IP</li>
+                </ul>
+                
+                <h3>2.2 Perlindungan Data</h3>
+                <p>Kami berkomitmen melindungi privasi pengguna dengan:</p>
+                <ol>
+                    <li>Tidak menjual, menyewakan, atau membagikan data pribadi ke pihak ketiga tanpa persetujuan</li>
+                    <li>Menerapkan enkripsi standar industri untuk data sensitif</li>
+                    <li>Menyimpan data hanya selama diperlukan untuk tujuan layanan</li>
+                    <li>Memberikan opsi untuk menghapus data pribadi sesuai permintaan</li>
+                    <li>Menerapkan pembatasan akses ketat terhadap data pengguna</li>
+                </ol>
+            </section>
             
-            <h3>1.2 Pembatasan Penggunaan</h3>
-            <p>Anda setuju untuk TIDAK:</p>
-            <ol>
-                <li>Menggunakan Bot untuk spam atau flood pesan</li>
-                <li>Memanipulasi atau mencoba meretas sistem Bot</li>
-                <li>Menyebarkan konten ilegal, pornografi, atau kekerasan</li>
-                <li>Melakukan aktivitas yang dapat membebani server</li>
-                <li>Menggunakan Bot untuk penipuan atau phishing</li>
-            </ol>
-        </section>
-        
-        <section>
-            <h2>2. Privasi dan Keamanan</h2>
+            <section>
+                <h2>3. Pembatasan Tanggung Jawab</h2>
+                
+                <p>Dalam batas yang diizinkan hukum, pengembang Bot tidak bertanggung jawab atas:</p>
+                <ul>
+                    <li>Kerugian langsung, tidak langsung, insidental, atau konsekuensial akibat penggunaan Bot</li>
+                    <li>Konten yang dihasilkan oleh fitur pihak ketiga atau integrasi eksternal</li>
+                    <li>Downtime, gangguan layanan, atau masalah teknis di luar kendali kami</li>
+                    <li>Penyalahgunaan Bot oleh pengguna lain atau pihak ketiga</li>
+                    <li>Perubahan kebijakan atau pembatasan oleh platform WhatsApp</li>
+                    <li>Kegagalan dalam transmisi data atau komunikasi</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <strong>Peringatan:</strong> Bot ini merupakan alat bantu dan tidak dimaksudkan untuk penggunaan kritis seperti layanan darurat, medis, atau keuangan penting.
+                </div>
+            </section>
             
-            <h3>2.1 Data Pengguna</h3>
-            <p>Kami dapat menyimpan data berikut untuk keperluan operasional Bot:</p>
-            <ul>
-                <li>Nomor telepon pengguna</li>
-                <li>Pesan dan perintah yang dikirim ke Bot</li>
-                <li>Data penggunaan (log aktivitas)</li>
-            </ul>
+            <section>
+                <h2>4. Perubahan Syarat Layanan</h2>
+                <p>Kami berhak untuk memodifikasi Syarat Layanan ini kapan saja sesuai kebutuhan. Perubahan akan:</p>
+                <ol>
+                    <li>Diumumkan melalui pembaruan di situs resmi atau melalui Bot</li>
+                    <li>Disertai dengan tanggal revisi terbaru di bagian atas dokumen ini</li>
+                    <li>Mulai berlaku segera setelah dipublikasikan kecuali dinyatakan lain</li>
+                </ol>
+                <p>Penggunaan berkelanjutan setelah perubahan berarti Anda menerima dan menyetujui syarat baru. Jika Anda tidak setuju dengan perubahan, Anda harus segera menghentikan penggunaan Bot.</p>
+            </section>
             
-            <h3>2.2 Perlindungan Data</h3>
-            <p>Kami berkomitmen melindungi data pengguna dengan:</p>
-            <ol>
-                <li>Tidak menjual atau membagikan data ke pihak ketiga</li>
-                <li>Menggunakan enkripsi untuk data sensitif</li>
-                <li>Menyimpan data hanya selama diperlukan</li>
-            </ol>
-        </section>
-        
-        <section>
-            <h2>3. Pembatasan Tanggung Jawab</h2>
-            
-            <p>Pengembang Bot tidak bertanggung jawab atas:</p>
-            <ul>
-                <li>Kerugian atau kerusakan akibat penggunaan Bot</li>
-                <li>Konten yang dihasilkan oleh fitur pihak ketiga</li>
-                <li>Downtime atau gangguan layanan di luar kendali kami</li>
-                <li>Penyalahgunaan Bot oleh pengguna lain</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>4. Perubahan Syarat Layanan</h2>
-            <p>Kami dapat mengubah Syarat Layanan ini kapan saja. Perubahan akan diberitahukan melalui pembaruan di situs resmi atau melalui Bot. Penggunaan berkelanjutan setelah perubahan berarti Anda menerima syarat baru.</p>
-        </section>
-        
-        <section>
-            <h2>5. Kontak</h2>
-            <p>Untuk pertanyaan tentang Syarat Layanan ini, Anda dapat menghubungi:</p>
-            <ul>
-                <li>Email: support@shikimori-md.example</li>
-                <li>WhatsApp: [Nomor Kontak Resmi]</li>
-                <li>Grup Komunitas: [Link Grup Resmi]</li>
-            </ul>
-        </section>
+            <section>
+                <h2>5. Kontak dan Dukungan</h2>
+                <p>Untuk pertanyaan, keluhan, atau permintaan terkait Syarat Layanan ini, silakan hubungi:</p>
+                
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <strong>Email Resmi</strong>
+                        support@shikimori-md.example
+                    </div>
+                    <div class="contact-item">
+                        <strong>WhatsApp</strong>
+                        +62 812-3456-7890 (Jam kerja 09:00-17:00 WIB)
+                    </div>
+                    <div class="contact-item">
+                        <strong>Komunitas</strong>
+                        Grup Dukungan Shikimori-MD
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
     
     <footer>
-        <p>© 2023 Shikimori-MD. Semua hak dilindungi.</p>
+        <p>© 2023 Shikimori-MD. Semua hak dilindungi. Versi 2.4.1</p>
     </footer>
 </body>
 </html>

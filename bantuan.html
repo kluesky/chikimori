@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #8a63f2;
-            --secondary: #6d3aff;
+            --primary: #6a45d1;
+            --primary-light: #8a6dff;
+            --secondary: #4a2db8;
             --dark: #12122b;
             --light: #f0f2ff;
-            --accent: #00f2fe;
-            --neon: #00f2fe;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-            --dark-gradient: linear-gradient(135deg, #0f0c29, #302b63);
+            --lighter: #ffffff;
+            --accent: #00c6ff;
+            --text: #e0e0ff;
+            --text-light: #a0a0c0;
+            --border: rgba(138, 99, 242, 0.2);
         }
         
         * {
@@ -26,11 +28,11 @@
         body {
             font-family: 'Poppins', 'Segoe UI', sans-serif;
             line-height: 1.7;
-            color: #e0e0ff;
+            color: var(--text);
             background-color: var(--dark);
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(138, 99, 242, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.1) 0%, transparent 20%);
+                radial-gradient(circle at 10% 20%, rgba(138, 99, 242, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 198, 255, 0.05) 0%, transparent 20%);
             overflow-x: hidden;
         }
         
@@ -40,170 +42,79 @@
             padding: 0 20px;
         }
         
-        /* Glowing Header */
+        /* Header Section */
         header {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 5rem 0 3rem;
             position: relative;
-            margin-bottom: 40px;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(138, 99, 242, 0.3) 0%, transparent 70%);
-            z-index: -1;
+            margin-bottom: 2rem;
         }
         
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-weight: 700;
             background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
-            font-weight: 700;
         }
         
         .subtitle {
             font-size: 1.2rem;
-            color: rgba(224, 224, 255, 0.8);
+            color: var(--text-light);
             max-width: 700px;
-            margin: 0 auto 30px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
         
-        /* Holographic Search */
-        .search-container {
-            max-width: 700px;
-            margin: 0 auto 60px;
-            position: relative;
-            perspective: 1000px;
-        }
-        
-        .search-box {
-            width: 100%;
-            padding: 18px 30px;
-            border-radius: 50px;
-            border: none;
-            font-size: 1.1rem;
-            background: rgba(18, 18, 43, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(138, 99, 242, 0.3);
-            color: white;
-            box-shadow: 
-                0 0 15px rgba(138, 99, 242, 0.3),
-                inset 0 0 10px rgba(0, 242, 254, 0.1);
-            transition: all 0.5s ease;
-        }
-        
-        .search-box:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 
-                0 0 25px rgba(0, 242, 254, 0.4),
-                inset 0 0 15px rgba(0, 242, 254, 0.2);
-        }
-        
-        .search-btn {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            background: var(--gradient);
-            color: white;
-            border: none;
-            padding: 13px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 5px 15px rgba(138, 99, 242, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(138, 99, 242, 0.6);
-        }
-        
-        /* 3D Card Grid */
+        /* Help Card Grid */
         .help-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            gap: 25px;
+            margin: 3rem 0 5rem;
         }
         
         .help-card {
             background: rgba(18, 18, 43, 0.6);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(138, 99, 242, 0.2);
-            box-shadow: 
-                0 5px 15px rgba(0, 0, 0, 0.2),
-                inset 0 0 10px rgba(138, 99, 242, 0.1);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .help-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(138, 99, 242, 0.1) 0%, transparent 70%);
-            z-index: -1;
-            transition: all 0.5s ease;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
         }
         
         .help-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 
-                0 15px 30px rgba(0, 0, 0, 0.3),
-                0 0 30px rgba(138, 99, 242, 0.2),
-                inset 0 0 15px rgba(0, 242, 254, 0.2);
-            border-color: rgba(0, 242, 254, 0.4);
-        }
-        
-        .help-card:hover::before {
-            transform: translate(25%, 25%);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            border-color: rgba(0, 198, 255, 0.4);
         }
         
         .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-light);
         }
         
         .help-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
             color: white;
+            font-weight: 600;
             position: relative;
-            display: inline-block;
+            padding-bottom: 0.5rem;
         }
         
         .help-card h3::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 50px;
             height: 3px;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             border-radius: 3px;
         }
         
@@ -212,9 +123,9 @@
         }
         
         .help-links li {
-            margin-bottom: 12px;
+            margin-bottom: 0.8rem;
             position: relative;
-            padding-left: 20px;
+            padding-left: 1.5rem;
         }
         
         .help-links li::before {
@@ -225,11 +136,11 @@
         }
         
         .help-links a {
-            color: rgba(224, 224, 255, 0.9);
+            color: var(--text);
             text-decoration: none;
             transition: all 0.3s ease;
             display: inline-block;
-            padding: 3px 0;
+            padding: 0.2rem 0;
         }
         
         .help-links a:hover {
@@ -237,31 +148,19 @@
             transform: translateX(5px);
         }
         
-        /* Animated FAQ */
+        /* FAQ Section */
         .faq-section {
-            margin: 80px 0;
+            margin: 4rem 0;
             position: relative;
-        }
-        
-        .faq-section::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(138, 99, 242, 0.5), transparent);
         }
         
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: white;
             position: relative;
             display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
         }
         
         .section-title::after {
@@ -272,7 +171,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             border-radius: 4px;
         }
         
@@ -284,20 +183,19 @@
         .faq-item {
             background: rgba(18, 18, 43, 0.6);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
             overflow: hidden;
-            border: 1px solid rgba(138, 99, 242, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
         
         .faq-item:hover {
-            border-color: rgba(0, 242, 254, 0.4);
+            border-color: rgba(0, 198, 255, 0.4);
         }
         
         .faq-question {
-            padding: 20px 30px;
+            padding: 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -313,15 +211,15 @@
         
         .faq-question i {
             transition: transform 0.3s ease;
+            color: var(--accent);
         }
         
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            padding: 0 30px;
-            transition: all 0.5s ease;
-            color: rgba(224, 224, 255, 0.8);
-            border-top: 1px solid transparent;
+            padding: 0 1.5rem;
+            transition: all 0.4s ease;
+            color: var(--text-light);
         }
         
         .faq-item.active .faq-question i {
@@ -329,143 +227,123 @@
         }
         
         .faq-item.active .faq-answer {
-            max-height: 300px;
-            padding: 20px 30px;
-            border-top: 1px solid rgba(138, 99, 242, 0.2);
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem;
         }
         
-        /* Neon Contact Section */
+        /* Contact Section */
         .contact-section {
-            margin: 100px 0 50px;
-            position: relative;
+            margin: 5rem 0 3rem;
         }
         
         .contact-card {
-            background: var(--dark-gradient);
-            border-radius: 25px;
-            padding: 50px;
+            background: rgba(18, 18, 43, 0.8);
+            border-radius: 16px;
+            padding: 3rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.3),
-                0 0 40px rgba(138, 99, 242, 0.2);
-            border: 1px solid rgba(0, 242, 254, 0.2);
-        }
-        
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                var(--primary), 
-                var(--accent), 
-                var(--secondary), 
-                var(--accent));
-            background-size: 400%;
-            z-index: -1;
-            border-radius: 25px;
-            animation: glow 8s linear infinite;
-            opacity: 0.7;
-        }
-        
-        @keyframes glow {
-            0% { background-position: 0 0; }
-            50% { background-position: 400% 0; }
-            100% { background-position: 0 0; }
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         .contact-title {
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
             color: white;
         }
         
         .contact-desc {
-            color: rgba(224, 224, 255, 0.8);
+            color: var(--text-light);
             max-width: 600px;
-            margin: 0 auto 30px;
+            margin: 0 auto 2rem;
         }
         
         .contact-methods {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 1.5rem;
         }
         
         .contact-method {
-            background: rgba(0, 242, 254, 0.1);
+            background: rgba(0, 198, 255, 0.1);
             backdrop-filter: blur(5px);
-            padding: 15px 25px;
-            border-radius: 10px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 0.8rem;
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 242, 254, 0.2);
+            border: 1px solid rgba(0, 198, 255, 0.2);
         }
         
         .contact-method:hover {
-            background: rgba(0, 242, 254, 0.2);
+            background: rgba(0, 198, 255, 0.2);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
         }
         
         .contact-method i {
             color: var(--accent);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
-        /* Floating Particles */
-        .particle {
-            position: absolute;
-            background: rgba(0, 242, 254, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 3rem;
         }
         
         /* Responsive */
         @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
             h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
             }
             
             .help-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .help-card {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 2rem;
             }
             
             .contact-methods {
                 flex-direction: column;
                 align-items: center;
+                gap: 0.8rem;
             }
             
-            .contact-card {
-                padding: 30px 20px;
+            .contact-method {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Particles -->
-    <div id="particles"></div>
-    
     <div class="container">
         <header>
             <h1>Pusat Bantuan Shikimori-MD</h1>
-            <p class="subtitle">Temukan solusi instan atau hubungi tim dukungan kami untuk bantuan lebih lanjut</p>
-            
-            <div class="search-container">
-                <input type="text" class="search-box" placeholder="Ketik masalah Anda...">
-                <button class="search-btn">
-                    <i class="fas fa-search"></i> Cari
-                </button>
-            </div>
+            <p class="subtitle">Temukan solusi untuk masalah Anda atau hubungi tim dukungan kami untuk bantuan lebih lanjut</p>
         </header>
         
         <section class="help-grid">
@@ -564,7 +442,14 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Anda bisa mengundang Shikimori-MD ke grup dengan mengklik link undangan resmi dari website kami atau menambahkan nomor bot (+62xxx) ke grup Anda secara manual. Pastikan Anda memiliki izin admin untuk menambahkan anggota baru ke grup.</p>
+                        <p>Untuk mengundang Shikimori-MD ke grup WhatsApp Anda:</p>
+                        <ol>
+                            <li>Buka grup WhatsApp yang ingin Anda tambahkan bot</li>
+                            <li>Klik "Tambah Anggota" di menu grup</li>
+                            <li>Cari nomor bot (+62xxx) atau scan QR code dari website resmi</li>
+                            <li>Pastikan Anda memiliki izin admin untuk menambahkan anggota baru</li>
+                        </ol>
+                        <p>Setelah ditambahkan, bot akan mengirimkan pesan pengenalan dan daftar perintah dasar yang tersedia.</p>
                     </div>
                 </div>
                 
@@ -574,7 +459,13 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Beberapa kemungkinan penyebab: 1) Bot tidak memiliki izin admin yang diperlukan, 2) Fitur tersebut dinonaktifkan oleh admin grup, 3) Ada pembatasan dari WhatsApp, atau 4) Fitur sedang dalam perbaikan. Cek dokumentasi untuk persyaratan tiap perintah.</p>
+                        <p>Beberapa kemungkinan penyebab dan solusinya:</p>
+                        <ul>
+                            <li><strong>Izin Admin:</strong> Beberapa perintah membutuhkan status admin. Pastikan bot telah dijadikan admin grup.</li>
+                            <li><strong>Pembatasan Grup:</strong> Fitur mungkin dinonaktifkan oleh pengaturan grup. Gunakan perintah <code>/settings</code> untuk mengecek.</li>
+                            <li><strong>Pembaruan Bot:</strong> Fitur mungkin sedang dalam perbaikan. Cek status di <code>/status</code>.</li>
+                            <li><strong>Limit Penggunaan:</strong> Akun gratis memiliki batasan perintah tertentu.</li>
+                        </ul>
                     </div>
                 </div>
                 
@@ -584,7 +475,13 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Shikimori-MD hanya menyimpan data yang diperlukan untuk operasional seperti ID pengguna, preferensi setting, dan log aktivitas terbatas. Konten percakapan tidak disimpan permanen kecuali untuk fitur tertentu yang membutuhkan penyimpanan sementara (seperti fitur reminder atau notes).</p>
+                        <p>Kebijakan penyimpanan data Shikimori-MD:</p>
+                        <ul>
+                            <li><strong>Data yang Disimpan:</strong> ID pengguna, preferensi setting, log aktivitas terbatas (waktu penggunaan, perintah yang digunakan)</li>
+                            <li><strong>Data Tidak Disimpan:</strong> Konten percakapan biasa, media yang dikirim (kecuali untuk fitur tertentu yang membutuhkannya)</li>
+                            <li><strong>Penyimpanan Sementara:</strong> Beberapa fitur seperti reminder atau notes menyimpan data secara sementara hingga fitur selesai dijalankan</li>
+                        </ul>
+                        <p>Anda dapat meminta penghapusan data melalui perintah <code>/deleteaccount</code> atau menghubungi tim dukungan.</p>
                     </div>
                 </div>
                 
@@ -594,7 +491,13 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Anda bisa melaporkan masalah atau memberikan saran melalui: 1) Grup komunitas resmi di WhatsApp, 2) Formulir laporan bug di website kami, atau 3) Akun Twitter dukungan @ShikimoriMD. Sertakan detail seperti versi bot, langkah reproduksi bug, dan screenshot jika memungkinkan.</p>
+                        <p>Kami menghargai semua laporan dan saran Anda:</p>
+                        <ol>
+                            <li><strong>Grup Komunitas:</strong> Bergabunglah dengan grup WhatsApp resmi kami untuk diskusi langsung</li>
+                            <li><strong>Formulir Online:</strong> Isi formulir laporan bug di website resmi Shikimori-MD</li>
+                            <li><strong>Media Sosial:</strong> Hubungi kami melalui Twitter @ShikimoriMD_Support</li>
+                        </ol>
+                        <p>Sertakan detail seperti: versi bot, langkah reproduksi bug, screenshot, dan perangkat yang digunakan.</p>
                     </div>
                 </div>
                 
@@ -604,7 +507,28 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Akun premium memberikan akses ke: 1) Fitur eksklusif seperti custom command, 2) Limit penggunaan yang lebih tinggi, 3) Prioritas dukungan, 4) Akses beta fitur, 5) Penggunaan tanpa iklan, dan 6) Berbagai keuntungan lainnya. Anda bisa melihat perbandingan fitur lengkap di website kami.</p>
+                        <p>Keuntungan akun premium Shikimori-MD:</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <h4>Fitur Utama</h4>
+                                <ul>
+                                    <li>Custom Command</li>
+                                    <li>Auto-Reply Canggih</li>
+                                    <li>Backup Data Otomatis</li>
+                                    <li>Fitur Grup Lengkap</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Keuntungan Lain</h4>
+                                <ul>
+                                    <li>Limit 10x Lebih Tinggi</li>
+                                    <li>Prioritas Dukungan</li>
+                                    <li>Akses Fitur Beta</li>
+                                    <li>Tanpa Iklan</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p>Gunakan perintah <code>/premium</code> untuk melihat detail paket dan harga.</p>
                     </div>
                 </div>
             </div>
@@ -613,7 +537,7 @@
         <section class="contact-section">
             <div class="contact-card">
                 <h2 class="contact-title">Butuh Bantuan Lebih Lanjut?</h2>
-                <p class="contact-desc">Tim dukungan kami siap membantu Anda 24/7 melalui berbagai channel berikut:</p>
+                <p class="contact-desc">Tim dukungan kami siap membantu Anda melalui berbagai channel berikut:</p>
                 
                 <div class="contact-methods">
                     <div class="contact-method">
@@ -635,61 +559,24 @@
                 </div>
             </div>
         </section>
+        
+        <footer>
+            <p>© 2023 Shikimori-MD. Semua hak dilindungi. Versi 2.4.1</p>
+        </footer>
     </div>
 
     <script>
         // Animated FAQ
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
-            item.addEventListener('click', () => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const currentlyActive = document.querySelector('.faq-item.active');
+                if (currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                }
                 item.classList.toggle('active');
             });
-        });
-        
-        // Floating particles animation
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random properties
-                const size = Math.random() * 5 + 2;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const delay = Math.random() * 5;
-                const duration = Math.random() * 10 + 10;
-                const opacity = Math.random() * 0.5 + 0.1;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.opacity = opacity;
-                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite alternate`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Add floating animation to CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0% { transform: translate(0, 0); }
-                25% { transform: translate(10px, 10px); }
-                50% { transform: translate(20px, -5px); }
-                75% { transform: translate(-10px, 15px); }
-                100% { transform: translate(-20px, -10px); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
         });
     </script>
 </body>
